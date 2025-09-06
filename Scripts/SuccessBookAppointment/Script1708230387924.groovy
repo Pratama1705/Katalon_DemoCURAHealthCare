@@ -21,36 +21,36 @@ WebUI.openBrowser('')
 
 WebUI.navigateToUrl('https://katalon-demo-cura.herokuapp.com/')
 
-WebUI.click(findTestObject('KatalonDemo - CURA Healthcare Service/Login/iconToggleSidebar'))
+WebUI.click(findTestObject('element/Login/iconToggleSidebar'))
 
-WebUI.click(findTestObject('KatalonDemo - CURA Healthcare Service/Login/loginHyperlinkSidebar'))
+WebUI.click(findTestObject('element/Login/loginHyperlinkSidebar'))
 
-WebUI.setText(findTestObject('KatalonDemo - CURA Healthcare Service/Login/usernameFieldLoginPage'), 'John Doe')
+WebUI.setText(findTestObject('element/Login/usernameFieldLoginPage'), 'John Doe')
 
-WebUI.setEncryptedText(findTestObject('KatalonDemo - CURA Healthcare Service/Login/passwordFieldLoginPage'), 'g3/DOGG74jC3Flrr3yH+3D/yKbOqqUNM')
+WebUI.setEncryptedText(findTestObject('element/Login/passwordFieldLoginPage'), 'g3/DOGG74jC3Flrr3yH+3D/yKbOqqUNM')
 
-WebUI.click(findTestObject('KatalonDemo - CURA Healthcare Service/Login/buttonLogin'), FailureHandling.STOP_ON_FAILURE)
+WebUI.click(findTestObject('element/Login/buttonLogin'), FailureHandling.STOP_ON_FAILURE)
 
-WebUI.selectOptionByValue(findTestObject('KatalonDemo - CURA Healthcare Service/Appointment/selectFacilityDropdown'), 'Hongkong CURA Healthcare Center', 
+WebUI.selectOptionByValue(findTestObject('element/Appointment/selectFacilityDropdown'), 'Hongkong CURA Healthcare Center', 
     true)
 
-WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/applyReadmission'))
+WebUI.click(findTestObject('Object Repository/element/Appointment/applyReadmission'))
 
-WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/radioHealthcareProgramMedicaid'))
+WebUI.click(findTestObject('Object Repository/element/Appointment/radioHealthcareProgramMedicaid'))
 
-WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/visitScheduleDate'))
+WebUI.click(findTestObject('Object Repository/element/Appointment/visitScheduleDate'))
 
-WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/clickDateVisit'))
+WebUI.click(findTestObject('Object Repository/element/Appointment/clickDateVisit'))
 
-WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/inputComment'), 'test')
+WebUI.setText(findTestObject('Object Repository/element/Appointment/inputComment'), 'test')
 
-WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/buttonBookAppointment'))
+WebUI.click(findTestObject('Object Repository/element/Appointment/buttonBookAppointment'))
 
-WebUI.verifyElementVisible(findTestObject('KatalonDemo - CURA Healthcare Service/Appointment/verifyAppointmentConfirmation'))
+WebUI.verifyElementVisible(findTestObject('element/Appointment/verifyAppointmentConfirmation'))
 
-WebUI.verifyElementVisible(findTestObject('KatalonDemo - CURA Healthcare Service/Appointment/validateFacility'), FailureHandling.STOP_ON_FAILURE)
+WebUI.verifyElementVisible(findTestObject('element/Appointment/validateFacility'), FailureHandling.STOP_ON_FAILURE)
 
-WebUI.verifyElementVisible(findTestObject('KatalonDemo - CURA Healthcare Service/Appointment/validateReadmission'), FailureHandling.STOP_ON_FAILURE)
+WebUI.verifyElementVisible(findTestObject('element/Appointment/validateReadmission'), FailureHandling.STOP_ON_FAILURE)
 
-WebUI.verifyElementVisible(findTestObject('KatalonDemo - CURA Healthcare Service/Appointment/validateProgram'), FailureHandling.STOP_ON_FAILURE)
+WebUI.verifyElementVisible(findTestObject('element/Appointment/validateProgram'), FailureHandling.STOP_ON_FAILURE)
 

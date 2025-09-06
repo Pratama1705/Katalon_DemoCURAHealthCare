@@ -17,22 +17,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-WebUI.openBrowser('')
+CucumberKW.runFeatureFile('Include/features/LoginPage.feature')
 
-WebUI.navigateToUrl('https://katalon-demo-cura.herokuapp.com/')
-
-WebUI.click(findTestObject('Object Repository/element/Login/iconToggleSidebar'))
-
-WebUI.click(findTestObject('Object Repository/element/Login/loginHyperlinkSidebar'))
-
-WebUI.setText(findTestObject('Object Repository/element/Login/usernameFieldLoginPage'), 'John Doe')
-
-WebUI.setEncryptedText(findTestObject('Object Repository/element/Login/passwordFieldLoginPage'), 
-    'g3/DOGG74jC3Flrr3yH+3D/yKbOqqUNM')
-
-WebUI.click(findTestObject('Object Repository/element/Login/buttonLogin'))
-
-WebUI.verifyElementVisible(findTestObject('Object Repository/element/Login/textValidationSucessLogin'))
-
-WebUI.closeBrowser()
+CucumberKW.runFeatureFile('Include/features/Appointment/successMakeAppointment.feature')
 

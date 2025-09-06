@@ -19,6 +19,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import internal.GlobalVariable
 
+import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.By
@@ -41,45 +42,97 @@ import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
 
+import java.util.concurrent.TimeUnit
+
 class LoginPage {
+	WebDriver driver
+	String result = '';
+
 	@Given("I open website page and navigate to login page")
 	def openWebsiteNavigateLoginPage() {
-		WebUI.openBrowser('')
+		// Set driver chrome
+		System.setProperty("webdriver.chrome.driver", DriverFactory.getChromeDriverPath())
+		driver = new ChromeDriver()
+		driver.manage().window().maximize()
 
-		WebUI.navigateToUrl('https://katalon-demo-cura.herokuapp.com/')
+		// Go to url website
+		driver.get('https://katalon-demo-cura.herokuapp.com/')
 
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/iconToggleSidebar'))
+		// Wait implicity
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/loginHyperlinkSidebar'))
+		// Click icon sidebar toggle
+		driver.findElement(By.xpath('//a[@id="menu-toggle"]')).click()
+
+		// Wait implicity
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+		// Click login hyperlink
+		driver.findElement(By.xpath('//a[text()="Login"]')).click()
+
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	@When("I input username (.*) or password (.*) with incorrect value")
 	def inputFailUsernamePassword(String username, String password) {
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/usernameFieldLoginPage'), username)
+		// Input Username
+		driver.findElement(By.xpath('//input[@id="txt-username"]')).sendKeys(username);
 
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/passwordFieldLoginPage'), password)
+		// Input Password
+		driver.findElement(By.xpath('//input[@id="txt-password"]')).sendKeys(password);
 
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/buttonLogin'))
+		// Waiting
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		// Click Login
+		driver.findElement(By.xpath('//button[@id="btn-login"]')).click();
 	}
 
 	@Then("I see validation not able to login")
 	def verifyFailedLogin() {
-		WebUI.verifyElementVisible(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/textValidationFailedLogin'))
+		// Verify Text Failed is Shown
+		Boolean textFailed = driver.findElement(By.xpath('//p[contains(text(), "Login failed!")]')).isDisplayed();
+
+		// Logic True/False
+		if (textFailed) {
+			result = "PASS";
+		} else {
+			result = "FAILED";
+		}
+
+		// Assertion
+		assert(result == "PASS");
+
+		result = '';
+		driver.quit();
 	}
 
 	@When("I input username (.*) and password (.*) with correct value")
 	def inputUsernamePassword(String username, String password) {
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/usernameFieldLoginPage'), username)
+		driver.findElement(By.xpath('//input[@id="txt-username"]')).sendKeys(username);
 
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/passwordFieldLoginPage'), password)
+		driver.findElement(By.xpath('//input[@id="txt-password"]')).sendKeys(password);
 
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/buttonLogin'))
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		driver.findElement(By.xpath('//button[@id="btn-login"]')).click();
 	}
 
 	@Then("I successfully login")
 	def verifySuccessLogin() {
-		WebUI.verifyElementVisible(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/textValidationSucessLogin'))
+		Boolean textSuccess = driver.findElement(By.xpath('//section[@id="appointment"]/div/div/div/h2')).isDisplayed();
 
-		WebUI.closeBrowser()
+		// Logic True/False
+		if (textSuccess) {
+			result = "PASS";
+		} else {
+			result = "FAILED";
+		}
+
+		// Assertion
+		assert(result == "PASS");
+
+		result = '';
+		driver.quit();
 	}
 }

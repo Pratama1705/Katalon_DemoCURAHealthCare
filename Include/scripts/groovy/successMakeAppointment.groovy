@@ -45,71 +45,71 @@ class successMakeAppointment {
 	@Given("I open browser and navigate to website")
 	def openBrowserNavigateWebsite() {
 		WebUI.openBrowser('')
-		
+
 		WebUI.navigateToUrl('https://katalon-demo-cura.herokuapp.com/')
 	}
 
 	@Then("I login in that website with username (.*) and password (.*)")
 	def loginToWebsite(String username, String password) {
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/iconToggleSidebar'))
+		WebUI.click(findTestObject('Object Repository/element/Login/iconToggleSidebar'))
 
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/loginHyperlinkSidebar'))
-	
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/usernameFieldLoginPage'), username)
-		
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/passwordFieldLoginPage'), password)
+		WebUI.click(findTestObject('Object Repository/element/Login/loginHyperlinkSidebar'))
 
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/buttonLogin'))
-	
-		WebUI.verifyElementVisible(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Login/textValidationSucessLogin'))
+		WebUI.setText(findTestObject('Object Repository/element/Login/usernameFieldLoginPage'), username)
+
+		WebUI.setText(findTestObject('Object Repository/element/Login/passwordFieldLoginPage'), password)
+
+		WebUI.click(findTestObject('Object Repository/element/Login/buttonLogin'))
+
+		WebUI.verifyElementVisible(findTestObject('Object Repository/element/Login/textValidationSucessLogin'))
 	}
 
 	@When("I select a value (.*) in dropdown facility field")
 	def selectFacilityValue(String facility) {
-		WebUI.selectOptionByValue(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/selectFacilityDropdown'), facility, true)
+		WebUI.selectOptionByValue(findTestObject('Object Repository/element/Appointment/selectFacilityDropdown'), facility, true)
 	}
-	
+
 	@And("I figure it out to select hospital readmission checklist (.*)")
 	def conditionCheckReadmission(String readmission) {
 		if (readmission == 'Y') {
-			WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/applyReadmission'))
+			WebUI.click(findTestObject('Object Repository/element/Appointment/applyReadmission'))
 		}
 	}
-	
+
 	@And("I select a value (.*) radio button Healthcare Program")
 	def selectRadioButtonHealthProgram(String healthcare_program) {
 		if (healthcare_program == 'radio_program_medicaid') {
-			WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/radioHealthcareProgramMedicaid'))
+			WebUI.click(findTestObject('Object Repository/element/Appointment/radioHealthcareProgramMedicaid'))
 		} else if (healthcare_program == 'radio_program_medicare') {
-			WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/radioHealthcareProgramMedicare'))
+			WebUI.click(findTestObject('Object Repository/element/Appointment/radioHealthcareProgramMedicare'))
 		} else if (healthcare_program == 'radio_program_none') {
-			WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/radioHealthcareProgramNone'))
-		} 
+			WebUI.click(findTestObject('Object Repository/element/Appointment/radioHealthcareProgramNone'))
+		}
 	}
-	
+
 	@And("I input visit schedule and set date")
 	def inputScheculeVisit() {
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/visitScheduleDate'))
-		
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/clickDateVisit'))
+		WebUI.click(findTestObject('Object Repository/element/Appointment/visitScheduleDate'))
+
+		WebUI.click(findTestObject('Object Repository/element/Appointment/clickDateVisit'))
 	}
-	
+
 	@And("Write a comment")
 	def writeComment() {
-		WebUI.setText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/inputComment'), 'test')
+		WebUI.setText(findTestObject('Object Repository/element/Appointment/inputComment'), 'test')
 	}
-	
+
 	@And("Click Book Appointment button")
 	def bookAppointment() {
-		WebUI.click(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/buttonBookAppointment'))
+		WebUI.click(findTestObject('Object Repository/element/Appointment/buttonBookAppointment'))
 	}
-	
+
 	@Then("Success create appointment and verify the input (.*) (.*) (.*)")
 	def successCreateAppointment(String facility, String healthcare_program, String readmission) {
-		WebUI.verifyElementVisible(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/verifyAppointmentConfirmation'))
-	
-		WebUI.verifyElementText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/validateFacility'), facility)
-		
+		WebUI.verifyElementVisible(findTestObject('Object Repository/element/Appointment/verifyAppointmentConfirmation'))
+
+		WebUI.verifyElementText(findTestObject('Object Repository/element/Appointment/validateFacility'), facility)
+
 		if (healthcare_program == 'radio_program_medicare') {
 			healthcare_program = 'Medicare'
 		} else if (healthcare_program == 'radio_program_medicaid') {
@@ -117,15 +117,15 @@ class successMakeAppointment {
 		} else if (healthcare_program == 'radio_program_none') {
 			healthcare_program = 'None'
 		}
-		
-		WebUI.verifyElementText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/validateProgram'), healthcare_program)
-		
+
+		WebUI.verifyElementText(findTestObject('Object Repository/element/Appointment/validateProgram'), healthcare_program)
+
 		if (readmission == 'Y') {
 			readmission = 'Yes'
 		} else if (readmission == 'N') {
 			readmission = 'No'
 		}
-		
-		WebUI.verifyElementText(findTestObject('Object Repository/KatalonDemo - CURA Healthcare Service/Appointment/validateReadmission'), readmission)
+
+		WebUI.verifyElementText(findTestObject('Object Repository/element/Appointment/validateReadmission'), readmission)
 	}
 }
