@@ -1,5 +1,5 @@
 @Test
-Feature: Test for integration to selenium behaviour
+Feature: Reusable Step - Katalon Demo Health
 
   @Test
   Scenario: Go To Login Page Katalon Demo Health & Login
